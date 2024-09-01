@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="local.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <img src="log.png" width="17%" height="17%" id="img">
+    </header>
+    <hr style="border: 1px solid black; margin: 0;">
+    <div id="toolBar">
+        <button id="timerButton" class="tools" onclick="apriTimer()">Timer</button>
+        <button id="spesaButton" class="tools">Lista</button>
+    </div>
+    <h2>Lista della spesa</h2>
+    <div id="ingredienti"></div>
+    <script>
+        let listaStorage = localStorage.getItem("shoppingList");
+        let lista = listaStorage ? JSON.parse(listaStorage) : [];
+
+        function mostraIngredienti() {
+            let divIngredienti = document.getElementById("ingredienti");
+            divIngredienti.innerHTML = "";
+
+            lista.forEach((ricetta, index) => {
+                let ingredienti = ricetta.ingredients.join(", ");
+                let p = document.createElement("p");
+                p.style.marginLeft = "5px";
+                p.setAttribute("data-index", index);
+                p.innerHTML = `<button class="bottoni" onclick="rimuovi(${index})">-</button>` + ingredienti;
+                divIngredienti.appendChild(p);
+            });
+        }
+
+        function rimuovi(index) {
+            lista.splice(index, 1);
+            localStorage.setItem("shoppingList", JSON.stringify(lista));
+            mostraIngredienti();
+        }
+
+        mostraIngredienti();
+
+        document.getElementById("img").addEventListener("click", () => {
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+
+</html>

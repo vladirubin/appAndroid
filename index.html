@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricette di Cucina</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="local.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <img src="log.png" width="17%" height="17%" id="img">
+    </header>
+    <hr style="border: 1px solid black; margin: 0;">
+    <div id="toolBar">
+        <button id="timerButton" class="tools" onclick="apriTimer()">Timer</button>
+        <button id="spesaButton" class="tools" onclick="apriLista()">Lista</button>
+    </div>
+
+    <form onsubmit="return cerca()">
+        <input type="search" placeholder="Search here ..." id="cerca" class="input">
+        <i class="fa fa-search" onclick="cerca()"></i>
+    </form>
+
+    <h3>Categorie popolari</h3>
+    <div id="catPop">
+        <button class="catPop" data-category="colazione">Colazione</button>
+        <button class="catPop" data-category="pranzo">Pranzo</button>
+        <button class="catPop" data-category="cena">Cena</button>
+        <button class="catPop" data-category="proteico">Proteico</button>
+        <button class="catPop" data-category="lowcarb">Low carb</button>
+    </div>
+    <div id="ingredientiContainer" style="margin-top:10px"></div>
+
+    <h3>Contacalorie</h3>
+    <div id="contenitoreCal">
+        <div style="margin-bottom: 2px;">
+            <button class="catCal" data-category="50-100kcal">50-100</button>
+            <button class="catCal" data-category="200-300kcal">200-300</button>
+            <button class="catCal" data-category="400-500kcal">400-500</button>
+            <button class="catCal" data-category="600-700kcal">600-700</button>
+        </div>
+        <div>
+            <button class="catCal" data-category="100-200kcal">100-200</button>
+            <button class="catCal" data-category="300-400kcal">300-400</button>
+            <button class="catCal" data-category="500-600kcal">500-600</button>
+            <button class="catCal" data-category="700+">700+</button>
+        </div>
+    </div>
+    <div id="ingredientiContainerCal" style="margin-top: 10px;"></div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

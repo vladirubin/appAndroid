@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risultati della Ricerca</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="local.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <img src="log.png" width="17%" height="17%" id="img">
+    </header>
+    <hr style="border: 1px solid black; margin: 0;">
+    <div id="toolBar">
+        <button id="timerButton" class="tools" onclick="apriTimer()">Timer</button>
+        <button id="spesaButton" class="tools" onclick="apriLista()">Lista</button>
+    </div>
+    <h1>Risultati della Ricerca</h1>
+    <div id="resultsContainer"></div>
+
+    <script>
+        let risultatiRic = JSON.parse(localStorage.getItem("risultatiRic"));
+
+
+        if (risultatiRic && risultatiRic.length > 0) {
+            risultatiRic.forEach(recipe => {
+                let recipeElement = document.createElement("div");
+                recipeElement.classList.add("recipe");
+                recipeElement.innerHTML = `
+                    <h3>${recipe.name}</h3>
+                    <div class="divs">
+                    <p>Ingredienti: ${recipe.ingredients.join(", ")}</p>
+                    <p>Calorie: ${recipe.calories}</p>
+                    <button onclick="addToShoppingList(${recipe.id})" class="btn">+</button>
+                    </div>
+                `;
+                resultsContainer.appendChild(recipeElement);
+            });
+        } else {
+            resultsContainer.innerHTML = "<p>Nessuna ricetta trovata.</p>";
+        }
+
+        function addToShoppingList(id) {
+            let ricettaSel = recipes.find(recipe => recipe.id === id);
+            if (ricettaSel) {
+                let listaStorage = localStorage.getItem("shoppingList");
+                let lista = listaStorage ? JSON.parse(listaStorage) : [];
+
+                lista.push(ricettaSel);
+
+                localStorage.setItem("shoppingList", JSON.stringify(lista));
+            }
+        }
+
+        function apriLista() {
+            window.location.href = "lista.html"
+        }
+    </script>
+</body>
+
+</html>
